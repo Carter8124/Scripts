@@ -6550,3 +6550,130 @@ for i, v in pairs(game.workspace.Spawns:GetChildren()) do
     then v.CFrame = game.Workspace.MyHouse.TP.CFrame
 end
 end
+--[[
+
+		Gui2Lua™
+		10zOfficial
+		Version 1.0.0
+
+]]
+
+
+-- Instances
+
+local ScreenGui = Instance.new("ScreenGui")
+local ImageLabel = Instance.new("ImageLabel")
+local Button = Instance.new("TextButton")
+local UICorner = Instance.new("UICorner")
+local Shadow = Instance.new("Frame")
+local UICorner_2 = Instance.new("UICorner")
+local TextLabel = Instance.new("TextLabel")
+
+-- Properties
+
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+ImageLabel.Parent = ScreenGui
+ImageLabel.BackgroundColor3 = Color3.new(1, 1, 1)
+ImageLabel.BackgroundTransparency = 1
+ImageLabel.Position = UDim2.new(0.499000013, 0, 0.499000013, 0)
+ImageLabel.Size = UDim2.new(0, 192, 0, 80)
+ImageLabel.Image = "rbxassetid://4500377880"
+
+Button.Name = "Button"
+Button.Parent = ImageLabel
+Button.BackgroundColor3 = Color3.new(0.301961, 0.392157, 0.588235)
+Button.BorderSizePixel = 0
+Button.Position = UDim2.new(0.030677706, 0, 0.211515754, 0)
+Button.Size = UDim2.new(0, 180, 0, 45)
+Button.ZIndex = 2
+Button.Font = Enum.Font.GothamMedium
+Button.Text = ""
+Button.TextColor3 = Color3.new(1, 1, 1)
+Button.TextScaled = true
+Button.TextSize = 14
+Button.TextWrapped = true
+
+UICorner.Parent = Button
+UICorner.CornerRadius = UDim.new(1, 0)
+
+Shadow.Name = "Shadow"
+Shadow.Parent = Button
+Shadow.BackgroundColor3 = Color3.new(0.207843, 0.270588, 0.403922)
+Shadow.BorderSizePixel = 0
+Shadow.Size = UDim2.new(1, 0, 1, 4)
+
+UICorner_2.Parent = Shadow
+UICorner_2.CornerRadius = UDim.new(1, 0)
+
+TextLabel.Parent = Button
+TextLabel.AnchorPoint = Vector2.new(0.5, 0.5)
+TextLabel.BackgroundColor3 = Color3.new(1, 1, 1)
+TextLabel.BackgroundTransparency = 1
+TextLabel.BorderColor3 = Color3.new(0.105882, 0.164706, 0.207843)
+TextLabel.BorderSizePixel = 0
+TextLabel.Position = UDim2.new(0.5, 0, 0.5, 0)
+TextLabel.Size = UDim2.new(1, -20, 1, -20)
+TextLabel.ZIndex = 2
+TextLabel.Font = Enum.Font.GothamMedium
+TextLabel.Text = "Go to the House"
+TextLabel.TextColor3 = Color3.new(1, 1, 1)
+TextLabel.TextScaled = true
+TextLabel.TextSize = 14
+TextLabel.TextWrapped = true
+
+
+local function JKIN_fake_script() -- ImageLabel.DragScript 
+	local script = Instance.new('LocalScript', ImageLabel)
+
+
+	local UIS = game:GetService('UserInputService')
+	local frame = script.Parent
+	local dragToggle = nil
+	local dragSpeed = 0.25
+	local dragStart = nil
+	local startPos = nil
+	
+	local function updateInput(input)
+		local delta = input.Position - dragStart
+		local position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X,
+			startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+		game:GetService('TweenService'):Create(frame, TweenInfo.new(dragSpeed), {Position = position}):Play()
+	end
+	
+	frame.InputBegan:Connect(function(input)
+		if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then 
+			dragToggle = true
+			dragStart = input.Position
+			startPos = frame.Position
+			input.Changed:Connect(function()
+				if input.UserInputState == Enum.UserInputState.End then
+					dragToggle = false
+				end
+			end)
+		end
+	end)
+	
+	UIS.InputChanged:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+			if dragToggle then
+				updateInput(input)
+			end
+		end
+	end)
+	
+end
+coroutine.wrap(JKIN_fake_script)()
+local function AEKCNSW_fake_script() -- Button.LocalScript 
+	local script = Instance.new('LocalScript', Button)
+
+	--Cboehme
+	
+	function onclick()
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Workspace.MyHouse.TP.CFrame
+	end
+	
+	script.Parent.MouseButton1Click:connect(onclick)
+end
+coroutine.wrap(AEKCNSW_fake_script)()
